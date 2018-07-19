@@ -65,10 +65,35 @@ $("#nuevoEjercicio").submit(function(){
       }
 
   });
-
   return false ;
 });
 
+//* LOGIN *//
+$("#login").submit(function () {
+ var email = $("#email").val(), pass=$("#password").val() ;
+ var login = base.ref().child('usuarios');
+ login.on('child_added',  function (usuarios){
+  if (usuarios.val().email == email  &&  usuarios.val().password== pass){
+    guardarSecion(usuarios.key, 1);
+    $("#iniciarSecion").addClass("hidden");
+    $("#home").removeClass("hidden");
+
+  }else {
+    alert ("Usuario o contraseña incorrectos");
+  }
+
+ });
+  return false;
+});
+
+
+
+function guardarSecion(userid, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = "MyGymUserId" + "=" + userid + ";" + expires + ";path=/";
+}
 
 
 
