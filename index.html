@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GYM Asistente</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+
+<body>
+	<div id ="wieport">
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#" id= "Titulo" >GYM</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        
+		      </ul>
+		     <!-- <form class="navbar-form navbar-left">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="Search">
+		        </div>
+		        <button type="submit" class="btn btn-default">Submit</button>
+		      </form> -->
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li class="active"><a href="#home"><i class="glyphicon glyphicon-heart"></i> Pagina pricipal</a></li>
+		        <li><a href="#configuracion"><i class="glyphicon glyphicon-cog"></i> Configuración</a></li>
+        
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+
+		<div id="pantalla" class="container">
+			
+			<div class="row"> 
+				<div class="col-lg-12"> 
+					
+					<!-- pagina de home -->
+					<div id="home" class="container paginaApp hidden">
+						
+					</div><!--fin  pagina home-->
+
+					<!-- Grupo muscular -->
+					<div id="grupoMuscular" class="container paginaApp hidden">
+						<h3>Agregar gupo muscular (MAQ)</h3>
+						<form id = "addMuscular" class="form-horizontal">
+							<div class="form-group">
+								<label>Nombre</label>
+								<input type="text" name="maq" id = "maq" class = "form-control" required>						
+							</div>
+							<div class="form-group text-right">
+								<button type ="submit" class="btn btn-default">Agregar</button>
+							</div>
+
+						</form>
+											
+					</div><!-- FIN Grupo muscular -->	
+					<!-- Crear ejercicios  -->	
+					<div id = "addEjercicio" class="container paginaApp ">
+						<h3>Agregar ejercicio</h3>
+						<form class="form-horizontal" id ="nuevoEjercicio">
+							<div class="form-group">
+								<label>Nombre</label>
+								<input type="text" name="nombre_ejercicio" id ="nombre_ejercicio" class="form-control" placeholder="nombre, ej. sentadilla " required>
+							</div>		
+							<div class="form-group">
+								<label>Grupo Muscular</label>
+								<select id = "maq_ejercicio" class="form-control" required placeholder="seleciona uno" ></select>
+
+							</div>		
+
+							<div class="form-group">
+								<label>Series</label>						
+								<input type="number" name="series_ejercicio" id="series_ejercicio" required class="form-control">
+							</div>		
+							<div class="form-group">
+								<label>Repeticiones</label>						
+								<input type="number" name="repeticiones_ejercicio" id="repeticiones_ejercicio" required class="form-control">
+							</div>
+							<div class="form-group text-right">
+								<button type="submit" class="btn btn-default">Agregar</button>
+							</div>
+
+
+
+						</form>
+					</div>
+					
+					<!-- Pagina de configuracion -->
+					<div id="configuracion" class="container paginaApp hidden">
+						<h3>Información basica</h3>
+						
+							<form action="" class="form-horizontal">
+								<div class="form-group">
+									<label >Género</label>	
+									<select id = "genero" name = "genero" class="form-control">
+										<option value="masculino"> Masculino </option>
+										<option value="fenenino"> Femenino</option>
+									</select>		
+								</div>
+								<div class="form-group">
+									<label>Altura</label>	
+									<input type="number" name="altura" id="altura" class="form-control"> <i class="text-muted">centímetros</i>
+											
+								</div>
+								<div class="form-group">
+									<label>Peso</label>	
+									<input type="number" name="peso" id="peso" class="form-control"> <i class="text-muted">kg</i>
+											
+								</div>
+							</form>
+						
+					</div><!--fin de pagina de configuración -->
+
+				</div>
+			</div>
+		</div>
+	 </div>		
+	
+	<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-functions.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="funciones.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
