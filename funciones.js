@@ -15,12 +15,15 @@
 $(".navbar-nav a").click(function (){
   $(".navbar-nav li").removeClass("active");
   $(this).parent().addClass("active");
-  $(".paginaApp").addClass("hidden");
-  var pageActive = $(this).attr("href");
-  $(""+pageActive+"").removeClass("hidden");
-  $("#Titulo").html(pageActive.split("#")['1']);
+  var pageActive = $(this).attr("href").split("#")[1];
+  navegacion(pageActive);
   $(".navbar-toggle").click();
 });
+
+function navegacion(cargarpagina){
+  $(".paginaApp").addClass("hidden");
+  $("#"+cargarpagina+"").removeClass("hidden");
+}
 
 
 //Insetar  grupo muscular 
@@ -75,8 +78,7 @@ $("#login").submit(function () {
  login.on('child_added',  function (usuarios){
   if (usuarios.val().email == email  &&  usuarios.val().password== pass){
     guardarSecion(usuarios.key, 1);
-    $("#iniciarSecion").addClass("hidden");
-    $("#home").removeClass("hidden");
+    navegacion("home");
 
   }else {
     alert ("Usuario o contraseña incorrectos");
