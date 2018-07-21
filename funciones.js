@@ -84,6 +84,7 @@ $("#login").submit(function () {
   if (usuarios.val().email == email  &&  usuarios.val().password== pass){
    if ( Cookies.set('gymuid', usuarios.key  ,{expires: 1}) ){
       console.log ("la secion se a guardad");
+      getDatos(usuarios);
    } //cookie que caduca a los 5 días
     navegacion("home");
 
@@ -122,11 +123,34 @@ $(document).ready(function () {
    }
 });
 
+//* carfa los datos del usuario logeado a los campos del la app 
 
 function getDatos (datos){
   $("#plan").html(datos.val().plan);
+  $("#altura").val(datos.val().altura);
+  $("#peso").val(datos.val().peso);
+  $("genero").val(datos.val().genero);
+
   var ejercicios = base.ref().child("ejercicios");
   ejercicios.on ("child_added", function (lista){
-    $("#listaEjercicios").append("<li class='list-group-item'> <span class='badge'>"+lista.val().series +" x "+lista.val().repeticiones+" </span> "+lista.val().nombre+"</li>");
+    $("#listaEjercicios").append("<li class='list-group-item'> <span class='badge bage-info'>"+lista.val().series +" x "+lista.val().repeticiones+" </span> "+lista.val().nombre+"</li>");
   })
 }
+//fija la barra de navegacion al hacer scrol 
+$(document).scroll(function (){
+  if ($(this).scrollTop() >= 80 ){
+    $("#menu").addClass("navbar-fixed-top");
+
+  }else{
+    $("#menu").removeClass("navbar-fixed-top");
+  }
+});
+
+$("#configuracion:input").change(function (){
+  var campo = $(this).attr("id");
+  var valor =  $(this).val();
+  var update = {}
+  update["usuarios/" + Cookies.get("gymuid") + "/" +campo ]= valor;
+  return base.ref().update(updates);
+
+});
