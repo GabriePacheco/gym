@@ -112,7 +112,7 @@ $(document).ready(function () {
       var user;
       var usuario = base.ref("usuarios/" + id );
       usuario.on('value', function (datos){
-         
+         getDatos (datos);
       }); 
       navegacion("home");
   
@@ -123,4 +123,10 @@ $(document).ready(function () {
 });
 
 
-$("#getFecha").val("1982-07-08");
+function getDatos (datos){
+  $("#plan").html(datos.val().plan);
+  var ejercicios = base.ref().child("ejercicios");
+  ejercicios.on ("child_added", function (lista){
+    $("#listaEjercicios").append("<li class='list-group-item'> <span class='badge'>"+lista.val().series +" x "+lista.val().repeticiones+" </span> "+lista.val().nombre+"</li>");
+  })
+}
