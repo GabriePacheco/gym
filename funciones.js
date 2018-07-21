@@ -23,6 +23,11 @@ $(".navbar-nav a").click(function (){
 function navegacion(cargarpagina){
   $(".paginaApp").addClass("hidden");
   $("#"+cargarpagina+"").removeClass("hidden");
+  if (cargarpagina != "iniciarSecion"){
+    $("#menu").removeClass("hidden");
+  } else {
+    $("#menu").addClass("hidden");
+  }
 }
 
 
@@ -77,8 +82,11 @@ $("#login").submit(function () {
  var login = base.ref().child('usuarios');
  login.on('child_added',  function (usuarios){
   if (usuarios.val().email == email  &&  usuarios.val().password== pass){
-    guardarSecion(usuarios.key, 1);
+   if ( Cookies.set('gymuid', usuarios.key  ,{expires: 1}) ){
+      console.log ("la secion se a guardad");
+   } //cookie que caduca a los 5 días
     navegacion("home");
+
 
   }else {
     alert ("Usuario o contraseña incorrectos");
@@ -89,23 +97,30 @@ $("#login").submit(function () {
 });
 
 
-
-function guardarSecion(userid, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = "MyGymUserId" + "=" + userid + ";" + expires + ";path=/";
-}
-
+//Carrar Sesion 
+$("#salir").click(function (){
+    Cookies.remove("gymuid");
+     $("#menu").addClass("hidden");
+      navegacion("iniciarSecion");
+});
 
 
-function writeUserData(userId,genero, name, peso) {
-  base.ref('usuarios/' + userId).set({
-    nombre: name,
-    peso:peso,
-    genero: genero,
-    altura: 165
+// INICIO DE LA PAGINA 
+$(document).ready(function () {
+   if (Cookies.get('gymuid') ){
+      var id = Cookies.get('gymuid');
+      var user;
+      var usuario = base.ref("usuarios/" + id );
+      usuario.on('value', function (datos){
+         
+      }); 
+      navegacion("home");
+  
+   }else{
+  
+    navegacion("iniciarSecion");
+   }
+});
 
-  });
-}
 
+$("#getFecha").val("1982-07-08");

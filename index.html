@@ -10,7 +10,7 @@
 
 <body>
 	<div id ="wieport">
-		<nav class="navbar navbar-default">
+		<nav id = "menu" class="navbar navbar-default ">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -20,7 +20,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#" id= "Titulo" >GYM</a>
+		      <a class="navbar-brand" href="#" > GYM <div id ="titulo"></div></a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,6 +37,7 @@
 		      <ul class="nav navbar-nav navbar-right">
 		      	<li class="active"><a href="#home"><i class="glyphicon glyphicon-heart"></i> Pagina pricipal</a></li>
 		        <li><a href="#configuracion"><i class="glyphicon glyphicon-cog"></i> Configuración</a></li>
+		        <li><a  id ="salir" href="#salir"><i class="glyphicon glyphicon-share-alt"></i> Salir</a></li>
         							
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
@@ -50,9 +51,11 @@
 
 					<!-- login -->
 					<div id="iniciarSecion" class= "container paginaApp" >
-						<h3>Inicio de seción <br>
-							<small>Registra tú datos o ingresa</small>
-						</h3>
+						<h2> &nbsp;</h2>
+						<h2 class="text-center">Bienbenido al asistente de GYM <br>
+						
+							<small class="text-center">Ingresa tús datos</small>
+						</h2>
 						<h2> &nbsp;</h2>
 						<form id = "login" class="form-horizontal">
 							<div class="form-group ">
@@ -67,8 +70,14 @@
 								<button tyepe="submit" class="btn btn-default btn-block">Entrar</button>
 							</div>
 							<div class="form-group">
-							<a href="#olvido">Olvide mi contraseña.</a>
-							
+								<div class="row"> 
+									<div class="col-xs-6"> 
+										<small><a href="#olvido">Olvide mi contraseña.</a></small>
+									</div>
+									<div class="col-xs-6 text-right"> 
+										<small><a href="#cambio">Registrarme.</a></small>
+									</div>									
+								</div>
 							</div>
 
 						</form>
@@ -77,6 +86,7 @@
 						
 					<!-- pagina de home -->
 					<div id="home" class="container paginaApp hidden">
+						<div id = "fecha" class= "text-center"><input type="date" id="getFecha"></div>
 						
 					</div><!--fin  pagina home-->
 
@@ -167,6 +177,7 @@
 	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-functions.js"></script>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="cookie.js"></script>
 	<script src="funciones.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
