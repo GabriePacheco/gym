@@ -131,6 +131,49 @@ function getDatos (datos){
   $("#peso").val(datos.val().peso);
   $("genero").val(datos.val().genero);
 
+  if (datos.val().lunes == true){
+    $(".btn[data-dia='lunes']").addClass("active");
+  }else{
+     $(".btn[data-dia='lunes']").removeClass("active");
+  }
+
+  if (datos.val().martes == true){
+    $(".btn[data-dia='martes']").addClass("active");
+  }else{
+     $(".btn[data-dia='martes']").removeClass("active");
+  }
+
+  if (datos.val().miercoles == true){
+    $(".btn[data-dia='miercoles']").addClass("active");
+  }else{
+     $(".btn[data-dia='miercoles']").removeClass("active");
+  }
+  if (datos.val().jueves == true){
+    $(".btn[data-dia='jueves']").addClass("active");
+  }else{
+     $(".btn[data-dia='jueves']").removeClass("active");
+  }
+ if (datos.val().viernes == true){
+    $(".btn[data-dia='viernes']").addClass("active");
+  }else{
+     $(".btn[data-dia='viernes']").removeClass("active");
+  }
+
+   if (datos.val().sabado == true){
+    $(".btn[data-dia='sabado']").addClass("active");
+  }else{
+     $(".btn[data-dia='sabado']").removeClass("active");
+  }
+    if (datos.val().domingo == true){
+    $(".btn[data-dia='domingo']").addClass("active");
+  }else{
+     $(".btn[data-dia='domingo']").removeClass("active");
+  }
+
+
+
+
+
   var ejercicios = base.ref().child("ejercicios");
   ejercicios.on ("child_added", function (lista){
     $("#listaEjercicios").append("<li class='list-group-item'> <span class='badge bage-info'>"+lista.val().series +" x "+lista.val().repeticiones+" </span> "+lista.val().nombre+"</li>");
@@ -149,6 +192,7 @@ $(document).scroll(function (){
 $("#configuracion:input").change(function (){
   var campo = $(this).attr("id");
   var valor =  $(this).val();
+  console.log(valor);
   var update = {}
   update["usuarios/" + Cookies.get("gymuid") + "/" +campo ]= valor;
   return base.ref().update(updates);
