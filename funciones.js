@@ -129,56 +129,71 @@ function getDatos (datos){
   $("#plan").html(datos.val().plan);
   $("#altura").val(datos.val().altura);
   $("#peso").val(datos.val().peso);
-  $("genero").val(datos.val().genero);
+  $("#genero").val(datos.val().genero);
 
   if (datos.val().lunes == true){
-    $(".btn[data-dia='lunes']").addClass("active");
+    $(".btn[data-dia='lunes']").addClass("btn-success");
+    $(".btn[data-dia='lunes']").removeClass("btn-default");
   }else{
-     $(".btn[data-dia='lunes']").removeClass("active");
-  }
+     $(".btn[data-dia='lunes']").removeClass("btn-success");
+    $(".btn[data-dia='lunes']").addClass("btn-default");
 
+  }
   if (datos.val().martes == true){
-    $(".btn[data-dia='martes']").addClass("active");
+    $(".btn[data-dia='martes']").addClass("btn-success");
+    $(".btn[data-dia='martes']").removeClass("btn-default");
   }else{
-     $(".btn[data-dia='martes']").removeClass("active");
-  }
+     $(".btn[data-dia='martes']").removeClass("btn-success");
+    $(".btn[data-dia='martes']").addClass("btn-default");
 
+  }
   if (datos.val().miercoles == true){
-    $(".btn[data-dia='miercoles']").addClass("active");
+    $(".btn[data-dia='miercoles']").addClass("btn-success");
+    $(".btn[data-dia='miercoles']").removeClass("btn-default");
   }else{
-     $(".btn[data-dia='miercoles']").removeClass("active");
+     $(".btn[data-dia='miercoles']").removeClass("btn-success");
+    $(".btn[data-dia='miercoles']").addClass("btn-default");
+
   }
   if (datos.val().jueves == true){
-    $(".btn[data-dia='jueves']").addClass("active");
+    $(".btn[data-dia='jueves']").addClass("btn-success");
+    $(".btn[data-dia='jueves']").removeClass("btn-default");
   }else{
-     $(".btn[data-dia='jueves']").removeClass("active");
+     $(".btn[data-dia='jueves']").removeClass("btn-success");
+    $(".btn[data-dia='jueves']").addClass("btn-default");
+
   }
- if (datos.val().viernes == true){
-    $(".btn[data-dia='viernes']").addClass("active");
+  if (datos.val().viernes == true){
+    $(".btn[data-dia='viernes']").addClass("btn-success");
+    $(".btn[data-dia='viernes']").removeClass("btn-default");
   }else{
-     $(".btn[data-dia='viernes']").removeClass("active");
-  }
+     $(".btn[data-dia='viernes']").removeClass("btn-success");
+    $(".btn[data-dia='viernes']").addClass("btn-default");
 
-   if (datos.val().sabado == true){
-    $(".btn[data-dia='sabado']").addClass("active");
+  }
+  if (datos.val().sabado == true){
+    $(".btn[data-dia='sabado']").addClass("btn-success");
+    $(".btn[data-dia='sabado']").removeClass("btn-default");
   }else{
-     $(".btn[data-dia='sabado']").removeClass("active");
+     $(".btn[data-dia='sabado']").removeClass("btn-success");
+    $(".btn[data-dia='sabado']").addClass("btn-default");
+
   }
-    if (datos.val().domingo == true){
-    $(".btn[data-dia='domingo']").addClass("active");
+   if (datos.val().domingo == true){
+    $(".btn[data-dia='domingo']").addClass("btn-success");
+    $(".btn[data-dia='domingo']").removeClass("btn-default");
   }else{
-     $(".btn[data-dia='domingo']").removeClass("active");
+     $(".btn[data-dia='domingo']").removeClass("btn-success");
+    $(".btn[data-dia='domingo']").addClass("btn-default");
+
   }
 
 
 
 
-
-  var ejercicios = base.ref().child("ejercicios");
-  ejercicios.on ("child_added", function (lista){
-    $("#listaEjercicios").append("<li class='list-group-item'> <span class='badge bage-info'>"+lista.val().series +" x "+lista.val().repeticiones+" </span> "+lista.val().nombre+"</li>");
-  })
 }
+
+
 //fija la barra de navegacion al hacer scrol 
 $(document).scroll(function (){
   if ($(this).scrollTop() >= 80 ){
@@ -189,12 +204,31 @@ $(document).scroll(function (){
   }
 });
 
-$("#configuracion:input").change(function (){
-  var campo = $(this).attr("id");
-  var valor =  $(this).val();
-  console.log(valor);
-  var update = {}
-  update["usuarios/" + Cookies.get("gymuid") + "/" +campo ]= valor;
-  return base.ref().update(updates);
+//Guarda los datos echos en la configuraciónn  Basica
+$("#configuracion :input").change(function (){
+    var campo = $(this).attr('id');
+    var valor = $(this).val();
+    var update = {};
+    update['usuarios/' + Cookies.get('gymuid') +"/" + campo ]= valor;
+    return base.ref().update(update);
+
+});
+
+$("#configuracion :button").click(function (){
+  var dia = $(this).attr("data-dia");
+  var valor;
+  if ($(this).hasClass('btn-success')){
+    $(this).removeClass('btn-success');
+     $(this).addClass('btn-default');
+    valor= false;
+  }else{
+    $(this).addClass('btn-success');
+      $(this).removeClass('btn-default');
+    valor = true;
+  }
+
+  update={};
+  update["usuarios/" + Cookies.get('gymuid')+"/" + dia]= valor;
+  return base.ref().update(update);
 
 });
