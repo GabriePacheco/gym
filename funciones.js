@@ -187,10 +187,6 @@ function getDatos (datos){
     $(".btn[data-dia='domingo']").addClass("btn-default");
 
   }
-
-
-
-
 }
 
 
@@ -214,6 +210,7 @@ $("#configuracion :input").change(function (){
 
 });
 
+//Guarda los  dias 
 $("#configuracion :button").click(function (){
   var dia = $(this).attr("data-dia");
   var valor;
